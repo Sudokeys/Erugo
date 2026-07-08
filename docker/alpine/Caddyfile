@@ -12,7 +12,12 @@
     
     # Simplified logging
     log {
-        output file /var/www/html/storage/logs/caddy.log
+        output file /var/www/html/storage/logs/caddy.log {
+            roll_keep_days 365
+            roll_keep      0
+            roll_size      50mb
+            roll_local_time
+        }
         format json
     }
     
