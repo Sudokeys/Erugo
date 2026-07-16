@@ -295,7 +295,7 @@ class UploadsController extends Controller
       $resolvedSharePath = realpath($completePath);
       
       if ($resolvedPath === false || $resolvedSharePath === false || 
-          strpos($resolvedPath, $resolvedSharePath) !== 0) {
+          ($resolvedPath !== $resolvedSharePath && strpos($resolvedPath, $resolvedSharePath . DIRECTORY_SEPARATOR) !== 0)) {
         Log::warning('Path traversal attempt detected', [
           'user_id' => $user->id,
           'original_path' => $request->filePaths[$uploadId] ?? '',
