@@ -589,7 +589,7 @@ const togglePause = () => {
   }
 }
 
-const showExpirySettings = ref(false)
+const showExpirySettings = ref(true)
 const toggleExpirySettings = () => {
   showExpirySettings.value = !showExpirySettings.value
 }
