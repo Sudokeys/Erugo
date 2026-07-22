@@ -83,8 +83,9 @@ class ReverseSharesController extends Controller
                 'name' => $request->recipient_name,
                 'email' => $finalEmail,
                 'password' => Hash::make(Str::random(20)), //set a random password so the user can't login
-                'is_guest' => true
             ]);
+            $guestUser->is_guest = true;
+            $guestUser->save();
             $guestUserId = $guestUser->id;
 
             // Generate a token only for guest users. Set validity to 24h
