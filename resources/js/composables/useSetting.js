@@ -1,5 +1,5 @@
 import { ref, onMounted, onUnmounted } from 'vue'
-import { emitter } from '../store'
+import { emitter, store } from '../store'
 import { getSettingsByGroup } from '../api'
 import { mapSettings } from '../utils'
 
@@ -9,6 +9,18 @@ const loadingGroups = ref({})
 
 // Load settings for a group
 const loadGroup = async (group) => {
+  const adminOnlyGroups = ['system']
+
+  const requiresAdmin = adminOnlyGroups.some(restricted => 
+    group === restricted || group.startsWith(restricted + '.')
+  )
+  
+  // If the group requires admin rights AND the user is not an admin
+  // Blocks the request silently to avoid the 403 error
+  if (requiresAdmin && !store.isAdmin()) {
+    return 
+  }
+
   if (loadingGroups.value[group]) {
     // Already loading, wait for it
     return

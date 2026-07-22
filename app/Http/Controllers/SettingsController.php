@@ -17,7 +17,7 @@ class SettingsController extends Controller
      * These contain credentials (SMTP passwords, etc.) that must not be
      * exposed to ordinary authenticated users.
      */
-    private const ADMIN_ONLY_GROUPS = ['system', 'system.smtp', 'system.auth'];
+    private const ADMIN_ONLY_GROUPS = ['system'];
 
     /**
      * Return true when the given group string falls under an admin-only prefix.
