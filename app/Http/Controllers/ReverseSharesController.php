@@ -31,6 +31,8 @@ class ReverseSharesController extends Controller
 
         $sendEmail = $request->boolean('send_email', true);
 
+        $request->merge(['recipient_email' => strtolower(trim($request->recipient_email ?? ''))]);
+
         $validator = Validator::make($request->all(), [
             'recipient_name' => ['required', 'string', 'max:255'],
             'recipient_email' => [$sendEmail ? 'required' : 'nullable', 'email', 'max:255'],
