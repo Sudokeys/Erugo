@@ -16,6 +16,10 @@ ENV SUPERVISOR_PHP_USER="erugo"
 # Enable community repository for PHP packages
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.24/community" >> /etc/apk/repositories
 
+# Temporary: PHP 8.3.37 (CERTFR-2026-AVI-1580) is only in edge for now; only php83* packages are
+# pinned to edge, their dependencies stay on v3.24. Remove the @edgecommunity tags once v3.24 has 8.3.37.
+RUN echo "@edgecommunity http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+
 # Install production requirements + development tools
 RUN apk add --no-cache \
     curl \
@@ -24,40 +28,40 @@ RUN apk add --no-cache \
     supervisor \
     cronie \
     ffmpeg \
-    php83 \
-    php83-pdo_pgsql \
-    php83-pdo_sqlite \
-    php83-gd \
-    php83-curl \
-    php83-pecl-mongodb \
-    php83-imap \
-    php83-pdo_mysql \
-    php83-mbstring \
-    php83-xml \
-    php83-zip \
-    php83-bcmath \
-    php83-soap \
-    php83-intl \
-    php83-ldap \
-    php83-pecl-redis \
-    php83-pecl-memcached \
-    php83-phar \
-    php83-openssl \
-    php83-json \
-    php83-dom \
-    php83-tokenizer \
-    php83-fileinfo \
-    php83-ctype \
-    php83-session \
-    php83-simplexml \
-    php83-xmlwriter \
-    php83-sodium \
+    php83@edgecommunity \
+    php83-pdo_pgsql@edgecommunity \
+    php83-pdo_sqlite@edgecommunity \
+    php83-gd@edgecommunity \
+    php83-curl@edgecommunity \
+    php83-pecl-mongodb@edgecommunity \
+    php83-imap@edgecommunity \
+    php83-pdo_mysql@edgecommunity \
+    php83-mbstring@edgecommunity \
+    php83-xml@edgecommunity \
+    php83-zip@edgecommunity \
+    php83-bcmath@edgecommunity \
+    php83-soap@edgecommunity \
+    php83-intl@edgecommunity \
+    php83-ldap@edgecommunity \
+    php83-pecl-redis@edgecommunity \
+    php83-pecl-memcached@edgecommunity \
+    php83-phar@edgecommunity \
+    php83-openssl@edgecommunity \
+    php83-json@edgecommunity \
+    php83-dom@edgecommunity \
+    php83-tokenizer@edgecommunity \
+    php83-fileinfo@edgecommunity \
+    php83-ctype@edgecommunity \
+    php83-session@edgecommunity \
+    php83-simplexml@edgecommunity \
+    php83-xmlwriter@edgecommunity \
+    php83-sodium@edgecommunity \
     tzdata \
     libcap \
     zip \
     unzip \
     git \
-    php83-fpm \
+    php83-fpm@edgecommunity \
     caddy \
     nodejs \
     npm \
